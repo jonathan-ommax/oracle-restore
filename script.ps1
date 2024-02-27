@@ -158,13 +158,10 @@ if (-not(Test-Path -Path $impdpScriptPath)) {
         chmod -R 777 $expDirTarget
         `$ORACLE_HOME/bin/impdp import_user/password DIRECTORY=DATA_PUMP_IMP DUMPFILE=$dumpfile LOGFILE=log_import.log SCHEMAS=$exportSchemas
 "@
-    # Using a writer here, because the typical "Out-File" verb adds Byte Order Mark (BOM)
-    # - Encoding utf8NoBOM is only available in PowerShell version >= 6, thus might require an
-    # upgrade on host system, which we want to avoid
+    # use writer here, because the typical "Out-File" verb adds Byte Order Mark (BOM); Encoding utf8NoBOM
+    # is only available in PowerShell version >= 6, thus might require an upgrade on host system, not feasible
+    # Taken from https://stackoverflow.com/questions/5596982/using-powershell-to-write-a-file-in-utf-8-without-the-bom
     [IO.File]::WriteAllLines($impdpScriptPath, $impdpFileContents)
-    # $writer = [System.IO.StreamWriter]::new($impdpScriptPath, $false, [System.Text.Encoding]::UTF8)
-    # $writer.Write($impdpFileContents)
-    # $writer.Close()
     # $impdpFileContents | Out-File -FilePath $impdpScriptPath -Encoding utf8
     Write-Log -message "created data pump import script at $impdpScriptPath"
 
