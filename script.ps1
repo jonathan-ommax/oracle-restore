@@ -1,3 +1,12 @@
+<#
+Script to export schema from locally running oracle db using export data pump utility and import dump file
+into oracle db running in docker container.
+The script will exit when an error occurs or the data import is completed successfully
+The script requires an existing base directory, e.g. 'C:\Users\username\OracleDataPumpExport\' passed as argument.
+It creates all required files and subdirectories on its own.
+By design, little emphasis is placed on graceful error handling.
+#>
+
 param (
     [Parameter(Mandatory=$true, helpmessage="The base path to the Oracle data pump export directory.")]
     [string]$baseDir = "C:\Users\jonathan.schwarzhaup\OracleDataPumpExport\",
