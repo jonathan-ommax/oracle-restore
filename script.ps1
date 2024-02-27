@@ -5,6 +5,10 @@ The script will exit when an error occurs or the data import is completed succes
 The script requires an existing base directory, e.g. 'C:\Users\username\OracleDataPumpExport\' passed as argument.
 It creates all required files and subdirectories on its own.
 By design, little emphasis is placed on graceful error handling.
+
+USAGE
+Navigate to directory and execute
+./script.ps1 -baseDir C:\Users\username\OracleDataPumpExport\ -port 1234 -exportSchema testschema -nlsParameter GERMAN_GERMANY.UTF8
 #>
 
 param (
