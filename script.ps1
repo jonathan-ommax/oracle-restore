@@ -8,7 +8,7 @@ By design, little emphasis is placed on graceful error handling.
 
 USAGE
 Navigate to directory and execute
-./script.ps1 -baseDir C:\Users\username\OracleDataPumpExport\ -port 1234 -exportSchema testschema -nlsParameter GERMAN_GERMANY.UTF8
+./script.ps1 -baseDir C:\Users\username\OracleDataPumpExport\ -port 1234 -exportSchema testschema -nlsParameter GERMAN_GERMANY.UTF8 -username username -password password
 #>
 
 param (
