@@ -21,7 +21,11 @@ param (
     [Parameter(Mandatory=$true, helpmessage="Schemas to export; single value or comma separated values as single string.")]
     [string]$exportSchemas = "systolicstest",
     [Parameter(Mandatory=$true, helpmessage="NLS_PARAMETER value for the target database. E.g. 'GERMAN_GERMANY.UTF8'.")]
-    [string]$nlsParameter = "GERMAN_GERMANY.UTF8"
+    [string]$nlsParameter = "GERMAN_GERMANY.UTF8",
+    [Parameter(Mandatory=$true, helpmessage="The username of the sysdba.")]
+    [string]$username = "system",
+    [Parameter(Mandatory=$true, helpmessage="The password for the sysdba.")]
+    [string]$password = "oracle"
 )
 
 # Writes a message to the log file
@@ -278,7 +282,7 @@ if($exportUserExists -eq 0) {
         exit;
 "@
     Write-Log -message "running sql: $sqlCreateExportUser"
-    Write-Output $sqlCreateExportUser | sqlplus -s / as sysdba
+    Write-Output $sqlCreateExportUser | sqlplus -s $username/$password
     Write-Log -message "created export user"
 }
 
